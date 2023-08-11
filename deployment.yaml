@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wms-CourierStub-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wms-CourierStub-app
+  template:
+    metadata:
+      labels:
+        app: wms-CourierStub-app
+    spec:
+      containers:
+      - name: wms-CourierStub-app
+        image: myacrpocrepo010823.azurecr.io/hariputhalapattu/WMSCourierStub:#{Build.BuildId}#
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8087
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wms-CourierStub-app
+    k8s-app: wms-CourierStub-app
+  name: wms-CourierStub-app
+spec:
+  ports:
+  - name: http
+    port: 87
+    protocol: TCP
+    targetPort: 8087
+  type: LoadBalancer
+  selector:
+    app: wms-CourierStub-app
