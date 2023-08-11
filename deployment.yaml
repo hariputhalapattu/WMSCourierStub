@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wms-CourierStub-app
-        image: myacrpocrepo010823.azurecr.io/hariputhalapattu/WMSCourierStub:#{Build.BuildId}#
+        image: myacrpocrepo010823.azurecr.io/hariputhalapattu/wmscourierstub:#{Build.BuildId}#
         imagePullPolicy: Always
         ports:
         - containerPort: 8087
